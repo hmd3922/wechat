@@ -35,7 +35,7 @@
 import InputGrop from "../components/InputGrop";
 import YButton from "../components/YButton.vue";
 import { login } from "@/api/user.js";
-import iwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 export default {
     name: "login",
     components: { InputGrop, YButton },
@@ -66,6 +66,13 @@ export default {
                 const { token } = res.data;
                 // 存储token;
                 localStorage.setItem("wxToken", token);
+
+                // 解析
+                const decode = jwt_decode(token);
+                // console.log(decode);
+                // 存储vuex
+                this.$store.dispatch("setUser", decode);
+                // 跳转
                 this.$router.push("/");
             });
         },

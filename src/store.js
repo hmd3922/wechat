@@ -3,14 +3,33 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const types = {
+    SET_USER: "SET_USER"
+}
+const state = {
+    user: {}
+}
+
+const getters = {
+    user: state => state.user
+};
+const mutations = {
+    [types.SET_USER](state, user) {
+        if (user) {
+            state.user = user;
+        } else {
+            state.user = {}
+        }
+    }
+}
+const actions = {
+    setUser: ({ commit }, user) => {
+        commit(types.SET_USER, user);
+    }
+}
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
+    state,
+    getters,
+    mutations,
+    actions
 })
