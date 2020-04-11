@@ -1,43 +1,28 @@
 <template>
     <div class="tabbar">
-        <a class="tab-item">
+        <router-link
+            class="tab-item"
+            v-for="(item, index) in data"
+            :key="index"
+            :to="item.path"
+            active-class="is-selected"
+        >
             <div class="tab-item-icon">
-                <i class="fa fa-comment"> </i>
+                <i :class="'fa fa-' + item.icon"></i>
             </div>
+
             <div class="tab-item-label">
-                微信
+                {{ item.title }}
             </div>
-        </a>
-        <a class="tab-item">
-            <div class="tab-item-icon">
-                <i class="fa fa-address-book"> </i>
-            </div>
-            <div class="tab-item-label">
-                通讯录
-            </div>
-        </a>
-        <a class="tab-item">
-            <div class="tab-item-icon">
-                <i class="fa fa-compass"> </i>
-            </div>
-            <div class="tab-item-label">
-                发现
-            </div>
-        </a>
-        <a class="tab-item">
-            <div class="tab-item-icon">
-                <i class="fa fa-user"> </i>
-            </div>
-            <div class="tab-item-label">
-                我的
-            </div>
-        </a>
+        </router-link>
     </div>
 </template>
-
 <script>
 export default {
     name: "tabbar",
+    props: {
+        data: Array
+    },
     components: {},
     data() {
         return {};
