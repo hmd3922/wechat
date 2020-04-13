@@ -13,11 +13,11 @@ const router = new Router({
             name: 'index',
             component: Index,
             children: [
-                {
-                    path: '',
-                    redirect: '/chats'
+                // {
+                //     path: '',
+                //     redirect: '/chats'
 
-                },
+                // },
                 {
                     path: "/chats",
                     name: 'chats',
@@ -53,11 +53,8 @@ const router = new Router({
     ]
 })
 router.beforeEach((to, from, next) => {
-    console.log(localStorage)
     const isLogin = localStorage.wxToken ? true : false;
-    console.log(isLogin)
-
-    if (to.path == 'login' || to.path == 'register') {
+    if (to.path == '/login' || to.path == '/register') {
         next()
     }
     else {

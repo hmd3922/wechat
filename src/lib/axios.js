@@ -18,22 +18,27 @@ class HttpRequest {
 
     interceptors(instance) {
         // 请求拦截器
-        instance.interceptors.request.use(config => {
-            if (localStorage.wxToken) {
-                config.headers.Authorization = localStorage.wxToken
-            }
-            return config
-        }, error => {
-            return Promise.reject(error)
-        })
+        instance.interceptors.request.use(
+            config => {
+                console.log(localStorage)
+                if (localStorage.wxToken) {
+                    console.log(config)
+                    config.headers.Authorization = localStorage.wxToken
+                }
+                return config
+            }, error => {
+                return Promise.reject(error)
+            })
         // 响应拦截器
         instance.interceptors.response.use(res => {
+            console.log(res)
             return res
         }, error => {
             // 错误提醒
-            const { status } = console.error.res;
+            const { status } = error.res;
+            console.log(status)
             if (status == 401) {
-                alert("Token过期")
+                alert('token值无效，请重新登录')
                 // 清除Token
                 localStorage.removeItem('wxToken')
                 // 页面跳转

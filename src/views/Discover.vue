@@ -1,10 +1,16 @@
 <template>
-    <div class="discover">发现</div>
+    <div class="chats">
+        <Header title="发现" />
+    </div>
 </template>
 
 <script>
+import Header from "_c/Header.vue";
 export default {
-    components: {},
+    name: "discover",
+    components: {
+        Header
+    },
     data() {
         return {};
     },

@@ -1,12 +1,16 @@
 <template>
     <div class="chats">
-        微信
+        <Header title="微信" btn_icon="plus" />
     </div>
 </template>
 
 <script>
+import Header from "_c/Header.vue";
 export default {
-    components: {},
+    name: "chats",
+    components: {
+        Header
+    },
     data() {
         return {};
     },
