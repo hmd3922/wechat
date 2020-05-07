@@ -20,38 +20,43 @@ class HttpRequest {
         // 请求拦截器
         instance.interceptors.request.use(
             config => {
-                console.log(localStorage)
+                // console.log(localStorage)
                 if (localStorage.wxToken) {
                     console.log(config)
-                    config.headers.Authorization = localStorage.wxToken
+                    config.headers['Authorization'] = localStorage.wxToken
                 }
                 return config
             }, error => {
                 return Promise.reject(error)
             })
         // 响应拦截器
-        instance.interceptors.response.use(res => {
-            console.log(res)
-            return res
-        }, error => {
-            // 错误提醒
-            const { status } = error.res;
-            console.log(status)
-            if (status == 401) {
-                alert('token值无效，请重新登录')
-                // 清除Token
-                localStorage.removeItem('wxToken')
-                // 页面跳转
-                router.push('/login')
-            } else {
-                alert(error.res.data)
-            }
-            return Promise.reject(error)
-        })
+        instance.interceptors.response.use(
+            response => {
+                console.log(response)
+                return response
+            }, error => {
+                // 错误提醒
+                // console.log(error)
+                let noToken = error.message.indexOf(401)
+                // console.log(noToken)
+                if (noToken) {
+                    console.log('没有Token')
+                    alert('token值无效，请重新登录')
+                    // 清除Token
+                    localStorage.removeItem('wxToken')
+                    // 页面跳转
+                    router.push('/login')
+                } else {
+                    alert(error)
+                }
+
+                return Promise.reject(error)
+            })
     }
     request(options) {
         const instance = axios.create()
         options = Object.assign(this.getInsideConfig(), options)
+        this.interceptors(instance)
         return instance(options)
     }
 }

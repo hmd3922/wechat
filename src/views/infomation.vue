@@ -1,11 +1,10 @@
 <template>
-    <div class="mine">
-        <Header title="我" />
-        <div class="container">
-            <InfoCell :userInfo="user" />
-            <div class="btn_wrapper">
-                <Button @click="loginOut">退出登录</Button>
-            </div>
+    <div class="infomation">
+        <Header :is-left="true" title="详细资料" btn_icon="ellipsis-h" />
+        <div class="container"></div>
+        <InfoCell :userInfo="targetUser" />
+        <div class="btn_wrapper">
+            <Button @click="sendMes()">发消息</Button>
         </div>
     </div>
 </template>
@@ -15,31 +14,34 @@ import Header from "_c/Header.vue";
 import InfoCell from "_c/infoCell.vue";
 import Button from "_c/YButton.vue";
 export default {
-    name: "me",
-    computed: {
-        user() {
-            return this.$store.getters.user;
-        },
-    },
+    name: "infomation",
     components: {
         Header,
         InfoCell,
         Button,
     },
+    computed: {
+        targetUser() {
+            return this.$store.getters.targetUser;
+        },
+    },
     data() {
         return {};
     },
     methods: {
-        loginOut() {
-            localStorage.removeItem("wxToken");
-            this.$router.push("/login");
+        sendMes() {
+            console.log(this.targetUser);
+            this.$router.push({
+                name: "chat",
+                params: { user: this.targetUser },
+            });
         },
     },
 };
 </script>
 
 <style scoped lang="less">
-.mine {
+.information {
     width: 100%;
     height: 100%;
     overflow: hidden;

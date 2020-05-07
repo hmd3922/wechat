@@ -9,12 +9,12 @@ import Header from "_c/Header.vue";
 export default {
     name: "discover",
     components: {
-        Header
+        Header,
     },
     data() {
         return {};
     },
-    methods: {}
+    methods: {},
 };
 </script>
 

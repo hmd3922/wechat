@@ -13,11 +13,6 @@ const router = new Router({
             name: 'index',
             component: Index,
             children: [
-                // {
-                //     path: '',
-                //     redirect: '/chats'
-
-                // },
                 {
                     path: "/chats",
                     name: 'chats',
@@ -43,12 +38,22 @@ const router = new Router({
         {
             path: '/login',
             name: 'login',
-            component: () => import('./views/login.vue')
+            component: () => import('@/views/login.vue')
         },
         {
             path: '/register',
             name: 'register',
-            component: () => import('./views/register.vue')
+            component: () => import('@/views/register.vue')
+        },
+        {
+            path: '/infomation',
+            name: 'infomation',
+            component: () => import('@/views/infomation.vue')
+        },
+        {
+            path: '/chat',
+            name: 'chat',
+            component: () => import('@/views/chatView.vue')
         }
     ]
 })

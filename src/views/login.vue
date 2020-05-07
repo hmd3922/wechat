@@ -43,15 +43,15 @@ export default {
         return {
             user: {
                 email: "",
-                password: ""
-            }
+                password: "",
+            },
         };
     },
     computed: {
         isDisabled() {
             if (this.user.email && this.user.password) return false;
             else return true;
-        }
+        },
     },
     methods: {
         loginClick() {
@@ -61,21 +61,21 @@ export default {
                 alert("请输入合法的邮箱地址");
                 return;
             }
-            login(this.user).then(res => {
+            login(this.user).then((res) => {
                 const { token } = res.data;
                 // 存储token;
                 localStorage.setItem("wxToken", token);
 
                 // 解析
                 const decode = jwt_decode(token);
-
+                console.log(decode);
                 // 存储vuex
                 this.$store.dispatch("setUser", decode);
                 // 跳转
-                this.$router.push("/");
+                this.$router.push({ name: "chats" });
             });
-        }
-    }
+        },
+    },
 };
 </script>
 

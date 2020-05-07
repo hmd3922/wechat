@@ -1,17 +1,19 @@
 <template>
-    <div class="cell-wrapper" v-if="userInfo">
+    <div class="cell-wrapper" @click="$emit('click')">
         <div class="cell-title">
-            <img :src="userInfo.avatar" alt />
-            <span>{{ userInfo.name }}</span>
+            <img :src="user.avatar" alt />
+            <span v-if="count" class="badge">{{ count }}</span>
+            <span>{{ user.name }}</span>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "ybutton",
+    name: "cell-cell",
     props: {
-        userInfo: Object,
+        user: Object,
+        count: Number,
     },
     components: {},
     data() {
@@ -50,5 +52,20 @@ export default {
 .cell-title span {
     display: inline-block;
     vertical-align: middle;
+}
+.badge {
+    background-color: #ff0a0a;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #fff;
+    position: absolute;
+    left: 2rem;
 }
 </style>
